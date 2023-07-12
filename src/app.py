@@ -8,7 +8,7 @@ from flask_swagger import swagger
 from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin import setup_admin
-from models import db, Characters, User, Person, Planet
+from models import db, Characters, User, Planets, Starships
 
 #from models import Person
 
@@ -33,6 +33,20 @@ def handle_invalid_usage(error):
     return jsonify(error.to_dict()), error.status_code
 
 # generate sitemap with all your endpoints
+@app.route('/characters', methods=['GET'])
+def get_characters():
+    characters = Characters.query.all()
+    result = [character.serialize() for character in characters]
+    return jsonify(result), 200
+
+@app.route('/characters/<int:character_id>', methods=['GET'])
+def get_character(character_id):
+    character = Characters.query.get(character_id)
+    if character:
+        return jsonify(character.serialize()), 200
+    else:
+        return jsonify({'message': 'Character not found'}), 404
+
 @app.route('/people', methods=['GET'])
 def get_people():
     people = Person.query.all()
@@ -51,19 +65,35 @@ def get_person(people_id):
 
 @app.route('/planets', methods=['GET'])
 def get_planets():
-    planets = Planet.query.all()
+    planets = Planets.query.all()
     result = []
     for planet in planets:
-        result.append(planet.serialize())
+        result.append(planets.serialize())
     return jsonify(result), 200
 
 @app.route('/planets/<int:planet_id>', methods=['GET'])
 def get_planet(planet_id):
-    planet = Planet.query.get(planet_id)
+    planet = Planets.query.get(planet_id)
     if planet:
         return jsonify(planet.serialize()), 200
     else:
         return jsonify({'message': 'Planet not found'}), 404
+    
+
+@app.route('/starships', methods=['GET'])
+def get_starships():
+    starships = Starships.query.all()
+    result = [starship.serialize() for starship in starships]
+    return jsonify(result), 200
+
+@app.route('/starships/<int:starship_id>', methods=['GET'])
+def get_starship(starship_id):
+    starship = Starships.query.get(starship_id)
+    if starship:
+        return jsonify(starship.serialize()), 200
+    else:
+        return jsonify({'message': 'Starship not found'}), 404
+
 
 
 

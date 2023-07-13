@@ -8,7 +8,7 @@ class Characters(db.Model):
     gender = db.Column(db.String(50))
     height = db.Column(db.String(50))
     birth_year = db.Column(db.String(50))
-    # Agrega más columnas según tus necesidades
+    # Agregar más columnas según las necesidades
 
     def __repr__(self):
         return 'El personaje es: <Characters %r>' % self.id 
@@ -84,7 +84,7 @@ class Starships(db.Model):
     name = db.Column(db.String(255), nullable=False)
     model = db.Column(db.String(255))
     manufacturer = db.Column(db.String(255))
-    # Agrega más columnas según tus necesidades
+    
 
     def __repr__(self):
         return '<Starships %r>' % self.id
@@ -95,10 +95,10 @@ class Starships(db.Model):
             'name': self.name,
             'model': self.model,
             'manufacturer': self.manufacturer
-            # Agrega más atributos según tus necesidades
+           
         }
 
-# User 1..n
+# User 1...n
     
 # class FavoriteCharacters(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)

@@ -102,7 +102,17 @@ class Starships(db.Model):
     
 # class FavoriteCharacters(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
-#     user = db.Column(db.String(255), nullable=False)
+#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+#     characters_Id = db.Column(db.Integer, db.ForeignKey('characters.id'))
+
+    # def serialize(self):
+    #     return{
+    #         "id": self.id,
+    #         "user_id": self.user_id,
+    #         "character_id": self.character_id,
+    #         "is_alive": self.is_alive
+    #     }
+        
 
 
 # USER / PERSONAJES

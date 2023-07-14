@@ -8,7 +8,7 @@ from flask_swagger import swagger
 from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin import setup_admin
-from models import db, Characters, User, Planets, Starships
+from models import db, Characters, User, Planets, Starships, FavoriteCharacters
 
 #from models import Person
 
@@ -111,6 +111,32 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+
+
+
+@app.route('/favorite/people/<int:people_id>', methods=['POST'])
+def create_favorite_people(people_id):
+    new_favorite_people = FavoriteCharacters(user_id=1, Characters_id=people_id)
+    db.session.add(new_faorite_people)
+    db.session.commit()
+
+    response_body = {
+        "msg": "Hello, this is your POST /favorite/people/<int:people_id> response ",
+        "result": new_favorite_people.serialize()
+    }
+
+    return jsonify(response_body), 200
+
+    
+
+
+
+
+
+
+
+
 
 # this only runs if `$ python src/app.py` is executed
 if __name__ == '__main__':
